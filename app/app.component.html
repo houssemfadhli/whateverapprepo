@@ -1,0 +1,62 @@
+<!--
+RadSideDrawer is a UI component part of the Progress NativeScript UI set of components.
+Learn more about the RadSideDrawer UI component and how it can be customized in this documentation article:
+http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawer/getting-started
+-->
+<RadSideDrawer
+  [drawerTransition]="sideDrawerTransition"
+  gesturesEnabled="false"
+>
+  <GridLayout
+    tkDrawerContent
+    rows="auto, *"
+    class="sidedrawer sidedrawer-left"
+    (tap)="closeSideDrawer()"
+  >
+    <StackLayout row="0" class="sidedrawer-header">
+      <Label
+        horizontalAlignment="center"
+        class="sidedrawer-header-image fa"
+        text="&#xf2bd;"
+      ></Label>
+      <Label
+        horizontalAlignment="center"
+        text="{{ usernameLabel }}"
+        class="sidedrawer-header-brand"
+      ></Label>
+    </StackLayout>
+    <ScrollView row="1">
+      <StackLayout class="sidedrawer-content">
+        <GridLayout columns="auto, *" class="sidedrawer-list-item">
+          <Label col="0" text="&#xf015;" class="fa"></Label>
+
+          <Label
+            col="1"
+            text="Home"
+            (tap)="toHomeScreen()"
+            class="p-r-10"
+          ></Label>
+        </GridLayout>
+
+        <GridLayout columns="auto, *" class="sidedrawer-list-item">
+          <Label col="0" text="&#xf007;" class="fa"></Label>
+          <Label
+            (tap)="toProfileScreen()"
+            col="1"
+            text="Profile"
+            class="p-r-10"
+          ></Label>
+        </GridLayout>
+
+        <StackLayout class="hr-light"></StackLayout>
+
+        <GridLayout columns="auto, *" class="sidedrawer-list-item">
+          <Label col="0" text="&#xf023;" class="fa"></Label>
+          <Label (tap)="logOut()" col="1" text="Logout" class="p-r-10"></Label>
+        </GridLayout>
+      </StackLayout>
+    </ScrollView>
+  </GridLayout>
+  <page-router-outlet tkMainContent class="page page-content">
+  </page-router-outlet>
+</RadSideDrawer>

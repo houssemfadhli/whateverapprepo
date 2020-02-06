@@ -1,0 +1,105 @@
+.post-card-view {
+  margin-left: 4;
+  margin-right: 4;
+  margin-top: 2;
+  margin-bottom: 2;
+  background-color: white;
+}
+.item-image {
+  width: 80;
+  height: 80;
+}
+.item-name {
+  color: #303c47;
+  font-family: "Open Sans", "OpenSans-Bold";
+  font-weight: bold;
+  padding: 2;
+}
+.add-button-container {
+  margin-top: 85%;
+  margin-left: 75%;
+}
+.item-desc {
+  color: #303c47;
+  font-family: "Open Sans", "OpenSans-Regular";
+  padding: 2;
+}
+.item-price {
+  color: #c40404;
+  font-family: "Open Sans", "OpenSans-Bold";
+  font-weight: bold;
+  padding: 2;
+}
+.add-button {
+  background-color: black;
+  width: 70;
+  height: 70;
+  font-size: 50;
+  padding: 0 0 8;
+  border-radius: 100%;
+  color: white;
+  margin-right: 15;
+}
+.edit-view-stack-layout {
+  width: 50%;
+  background-color: dodgerblue;
+  color: #ffffff;
+}
+.delete-view-stack-layout {
+  width: 50%;
+  background-color: red;
+  color: #ffffff;
+}
+.dialog-open .content {
+  opacity: 0.6;
+}
+.dialog-open .dialog-wrapper {
+  visibility: visible;
+}
+.dialog-wrapper {
+  visibility: collapse;
+}
+.dialog {
+  background-color: white;
+  width: 95%;
+  margin-left: 10;
+  margin-top: 100;
+  border-radius: 10;
+}
+.text-field {
+  padding: 15;
+  background: white;
+  color: black;
+  border-width: 0.5;
+  border-radius: 5;
+  border-color: gray;
+}
+.text-error {
+  color: red;
+  text-align: center;
+}
+.dialog-add-button {
+  border-radius: 5;
+  background-color: dodgerblue;
+  font-size: 16;
+  color: white;
+  width: 50%;
+}
+.dialog-cancel-button {
+  border-radius: 5;
+  background-color: red;
+  font-size: 16;
+  color: white;
+  width: 50%;
+}
+.dialog-logo {
+  margin: 10;
+  height: 90;
+  align-content: center;
+}
+.dialog-label {
+  padding: 10;
+  font-weight: bold;
+  font-size: 14;
+  text-align: center;
+}

@@ -1,0 +1,130 @@
+<ActionBar title="whateverapp" class="action-bar">
+  <ActionItem>
+    <StackLayout>
+      <Button
+        class="fa"
+        text="&#xf0c9;"
+        fontSize="18"
+        (tap)="onDrawerButtonTap()"
+      ></Button>
+    </StackLayout>
+  </ActionItem>
+</ActionBar>
+<GridLayout class="page" [class.dialog-open]="dialogOpen">
+  <StackLayout orientation="vertical" class="page page-content" tkMainContent>
+    <GridLayout class="content" tkExampleTitle tkToggleNavButton>
+      <RadListView
+        [items]="data"
+        id="radlistview"
+        swipeActions="true"
+        (pullToRefreshInitiated)="onPullToRefreshInitiated($event)"
+        (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
+        backgroundColor="#e6e6e6"
+        (itemLoading)="onItemLoading($event)"
+      >
+        <ListViewStaggeredLayout
+          tkListViewLayout
+          scrollDirection="Vertical"
+          spanCount="1"
+        >
+        </ListViewStaggeredLayout>
+        <ng-template tkTemplate let-item="item">
+          <DockLayout class="post-card-view">
+            <Image src="{{ item.imageSrc }}" class="item-image"></Image>
+            <StackLayout backgroundColor="white">
+              <Label
+                text="{{ item.name }}"
+                class="item-name"
+                textWrap="true"
+              ></Label>
+              <Label
+                text="{{ item.desc }}"
+                class="item-desc"
+                textWrap="true"
+              ></Label>
+              <Label text="{{ item.price }}" class="item-price"> </Label>
+              <Label visibility="collapsed" text="{{ item.byUsername }}">
+              </Label>
+              <Label visibility="collapsed" text="{{ item.postId }}"> </Label>
+            </StackLayout>
+          </DockLayout>
+        </ng-template>
+        <GridLayout
+          *tkListItemSwipeTemplate
+          columns="auto, *, auto"
+          class="listItemSwipeGridLayout"
+        >
+          <StackLayout
+            class="edit-view-stack-layout"
+            col="0"
+            (tap)="showDialog(1)"
+          >
+            <Label
+              text="EDIT"
+              verticalAlignment="center"
+              horizontalAlignment="left"
+            ></Label>
+          </StackLayout>
+          <StackLayout
+            class="delete-view-stack-layout"
+            col="1"
+            (tap)="onDelete()"
+          >
+            <Label
+              text="DELETE"
+              verticalAlignment="center"
+              horizontalAlignment="right"
+            ></Label>
+          </StackLayout>
+        </GridLayout>
+      </RadListView>
+      <StackLayout class="add-button-container">
+        <Button class="add-button" text="+" (tap)="showDialog(0)"> </Button>
+      </StackLayout>
+    </GridLayout>
+  </StackLayout>
+
+  <AbsoluteLayout class="dialog-wrapper">
+    <StackLayout class="dialog">
+      <Image class="dialog-logo" src="~/images/dialog-logo.png"></Image>
+      <label
+        class="dialog-label"
+        textWrap="true"
+        text="{{ addLabelText }}"
+      ></label>
+      <text-field
+        [(ngModel)]="title"
+        class="text-field"
+        hint="Title"
+      ></text-field>
+      <text-field
+        [(ngModel)]="description"
+        class="text-field"
+        hint="Description"
+      ></text-field>
+      <text-field
+        class="text-field"
+        hint="Price"
+        [(ngModel)]="price"
+        keyboardtype="number"
+      ></text-field>
+      <label
+        visibility="{{ textErrorValue ? 'visible' : 'collapsed' }}"
+        text="{{ textError }}"
+        class="text-error"
+      ></label>
+      <FlexboxLayout>
+        <Button
+          class="dialog-add-button"
+          text="{{ addButtonText }}"
+          (tap)="addOrUpdatePost()"
+        ></Button>
+        <Button
+          class="dialog-cancel-button"
+          text="Cancel"
+          (tap)="closeDialog()"
+        ></Button>
+      </FlexboxLayout>
+    </StackLayout>
+  </AbsoluteLayout>
+</GridLayout>

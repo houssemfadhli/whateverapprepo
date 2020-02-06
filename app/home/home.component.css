@@ -1,0 +1,29 @@
+.login-logo {
+  margin: 15;
+  height: 100;
+}
+.text-field {
+  padding: 15;
+  background: white;
+  color: black;
+  border-width: 0.5;
+  border-radius: 5;
+  border-color: gray;
+}
+.sign-in-button {
+  padding: 15;
+  background: dodgerblue;
+  color: white;
+  font-size: 16;
+  border-width: 0.5;
+  border-radius: 5;
+}
+.to-sign-up-screen {
+  padding: 15;
+  text-align: center;
+  color: gray;
+}
+.text-error {
+  color: red;
+  text-align: center;
+}

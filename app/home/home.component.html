@@ -1,0 +1,34 @@
+<ScrollView>
+  <StackLayout verticalAlignment="center">
+    <Image class="login-logo" src="~/images/app-logo.png"></Image>
+    <TextField
+      class="text-field"
+      [(ngModel)]="username"
+      hint="Username"
+      returnKeyType="next"
+      (returnPress)="focusPassword()"
+    >
+    </TextField>
+    <TextField
+      #passwordId
+      class="text-field"
+      [(ngModel)]="password"
+      hint="Password"
+      secure="true"
+      returnKeyType="done"
+    >
+    </TextField>
+    <label
+      visibility="{{ textErrorValue ? 'visible' : 'collapsed' }}"
+      text="{{ textError }}"
+      class="text-error"
+    ></label>
+    <Button class="sign-in-button" text="Sign in" (tap)="signIn()"> </Button>
+    <label
+      class="to-sign-up-screen"
+      text="Not yet a member ? sign up."
+      (tap)="toSignUpScreen()"
+    >
+    </label>
+  </StackLayout>
+</ScrollView>
