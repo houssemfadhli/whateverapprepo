@@ -3,69 +3,47 @@
 ![nativescript-url]
 ![angular-url]
 
-One to two paragraph statement about your product and what it does.
-
 ![](app-screen.png)
 
-## Installation
+## Features
 
-OS X & Linux:
+- [x] Create an account
+- [x] Manage posts
+- [x] Having a profil
+- [x] Manage user acounts
+- [x] No login needed to discover
 
-```sh
-npm install my-crazy-module --save
+## Requirements for android os
+
+- Android 4.2+
+- VScode
+
+## Installation from the beginning (Windows)
+
+##### WhateverApp
+1. First you need to follow these [steps](https://docs.nativescript.org/start/quick-setup)  
+2. Download and install [git](https://git-scm.com/)  
+3. Run cmd as an administrator, then ```git clone https://github.com/houssemfadhli/whateverapprepo.git```  
+
+```ruby
+platform :ios, '8.0'
+use_frameworks!
+pod 'YourLibrary'
 ```
 
-Windows:
-
-```sh
-edit autoexec.bat
 ```
-
-## Usage example
-
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
+github "houssemfadhli/whateverapprepo"
 ```
+#### Manually
+1. Download and drop ```whateverapprepo``` in any destination you want. 
+2. Open the project with VScode
+2. Run it!  
 
-## Release History
+## Contact
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
+Houssemfadhliwork@gmail.com  
 
-## Meta
-
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
-## Contributing
-
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
+[Profile](https://github.com/houssemfadhli/)
 
 [nativescript-url]: https://img.shields.io/badge/Nativescript%20%20-%20%20-blue
 [angular-url]: https://img.shields.io/badge/Angular-%20%20-red
