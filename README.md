@@ -5,12 +5,15 @@
 
 ![](app-screen.png)
 
+## Short description  
+WHATEVERAPP a test app that make it easy to find great deals on the things you want and make money on the things you want to sell.  
+
 ## Features
 
-- [x] Create an account
+- [x] Buy or sell anything easily.
 - [x] Manage your posts
 - [x] Having a profil
-- [x] Manage other user acounts
+- [x] Manage user acounts
 - [x] No login needed to discover
 
 ## Requirements for android os
