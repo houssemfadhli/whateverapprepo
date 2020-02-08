@@ -8,9 +8,9 @@
 ## Features
 
 - [x] Create an account
-- [x] Manage posts
+- [x] Manage your posts
 - [x] Having a profil
-- [x] Manage user acounts
+- [x] Manage other user acounts
 - [x] No login needed to discover
 
 ## Requirements for android os
@@ -22,14 +22,8 @@
 
 ##### WhateverApp
 1. First you need to follow these [steps](https://docs.nativescript.org/start/quick-setup)  
-2. Download and install [git](https://git-scm.com/)  
-3. Run cmd as an administrator, then ```git clone https://github.com/houssemfadhli/whateverapprepo.git```  
-
-```ruby
-platform :ios, '8.0'
-use_frameworks!
-pod 'YourLibrary'
-```
+2. Then download and install [git](https://git-scm.com/)  
+3. Finally run cmd as an administrator, then ```git clone https://github.com/houssemfadhli/whateverapprepo.git```  
 
 ```
 github "houssemfadhli/whateverapprepo"
