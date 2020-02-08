@@ -1,11 +1,11 @@
 # WhateverApp
 
-[nativescript-url]
-[angular-url]
+![nativescript-url]
+![angular-url]
 
 One to two paragraph statement about your product and what it does.
 
-![](header.png)
+![](app-screen.png)
 
 ## Installation
 
