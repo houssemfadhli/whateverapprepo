@@ -168,10 +168,11 @@ export class UsersComponent implements OnInit {
       });
   }
   getAllhUsers(): number {
-    this.k=0;
+    this.k = 0;
     for (let i = 0; i < this.data.length; i++) {
       if (
-        this.username.trim().toLowerCase() == this.data[i].username.trim().toLowerCase()
+        this.username.trim().toLowerCase() ==
+        this.data[i].username.trim().toLowerCase()
       ) {
         this.k++;
       }
@@ -212,6 +213,15 @@ export class UsersComponent implements OnInit {
         )
           .then(response => response.json())
           .then(json => console.log(json));
+        let radListView = <RadListView>(
+          FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
+        );
+        this.data.push({
+          username: this.username.toUpperCase(),
+          password: this.password.trim().toLowerCase(),
+          joinedAt: this.getFullDate()
+        });
+        radListView.notifyPullToRefreshFinished();
         this.closeDialog();
       } else {
         fetch(
@@ -234,6 +244,15 @@ export class UsersComponent implements OnInit {
           FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
         );
         this.data[this.selected].username = this.username.trim().toUpperCase();
+        if (
+          this.username.trim().toLowerCase() ==
+          appSettings.getString("localUsername")
+        ) {
+          appSettings.setString(
+            "localUsername",
+            this.username.trim().toLowerCase()
+          );
+        }
         this.closeDialog();
       }
     }
@@ -266,14 +285,6 @@ export class UsersComponent implements OnInit {
     if (this.password.trim() != this.secondpassword.trim()) {
       this.textErrorValue = "visible";
       this.textError = "Password does not match";
-      return false;
-    }
-    if (
-      this.password.trim().toLowerCase() ==
-      this.data[this.selected].password.trim().toLowerCase()
-    ) {
-      this.textErrorValue = "visible";
-      this.textError = "Try another new password";
       return false;
     }
     if (this.getAllhUsers() > 0) {

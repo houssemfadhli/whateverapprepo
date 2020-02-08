@@ -176,6 +176,18 @@ export class BodyComponent implements OnInit {
         )
           .then(response => response.json())
           .then(json => console.log(json));
+          let radListView = <RadListView>(
+            FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
+          );
+          this.data.push({
+            name: this.title,
+            postId: this.sumPosts+1,
+            desc: this.description,
+            price: this.price + " DT",
+            imageSrc: "https://image.flaticon.com/icons/svg/146/146817.svg",
+            byUsername: appSettings.getString("localUsername")
+          });
+          radListView.notifyPullToRefreshFinished();
         this.closeDialog();
       } else {
         fetch(
@@ -197,6 +209,9 @@ export class BodyComponent implements OnInit {
         let radListView = <RadListView>(
           FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
         );
+        this.data[this.selected].name = this.title;
+        this.data[this.selected].desc = this.description;
+        this.data[this.selected].price = this.price;
         this.closeDialog();
       }
     }
