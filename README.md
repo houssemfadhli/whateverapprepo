@@ -10,7 +10,7 @@ A test app that make it easy to find great deals on the things you want, just se
 
 ## Features
 
-- [x] Buy or sell anything easily.
+- [x] Buy or sell anything easily
 - [x] Manage your posts
 - [x] Having a profile
 - [x] Manage user acounts
