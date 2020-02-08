@@ -102,8 +102,8 @@ export class RegisterComponent implements OnInit {
         }
       }
     )
-      .then(response => response.json())
-      .then(json => console.log(json));
+      .then(response => response.text())
+      .then(text => console.log(text));
   }
   fetchUsers(): void {
     fetch(
