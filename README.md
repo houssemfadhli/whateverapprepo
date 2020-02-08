@@ -6,13 +6,13 @@
 ![](app-screen.png)
 
 ## Short description  
-WHATEVERAPP a test app that make it easy to find great deals on the things you want and make money on the things you want to sell.  
+WHATEVERAPP a test app that make it easy to find great deals on the things you want and make money and things you want to sell.  
 
 ## Features
 
 - [x] Buy or sell anything easily.
 - [x] Manage your posts
-- [x] Having a profil
+- [x] Having a profile
 - [x] Manage user acounts
 - [x] No login needed to discover
 
