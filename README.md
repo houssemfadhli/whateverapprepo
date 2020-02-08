@@ -6,7 +6,7 @@
 ![](app-screen.png)
 
 ## Short description  
-WHATEVERAPP a test app that make it easy to find great deals on the things you want and make money and things you want to sell.  
+A test app that make it easy to find great deals on the things you want, just sell and make money.    
 
 ## Features
 
