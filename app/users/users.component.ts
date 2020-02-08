@@ -8,66 +8,61 @@ import * as Utils from "utils/utils";
 import * as FrameModule from "ui/frame";
 import * as dialogs from "tns-core-modules/ui/dialogs";
 import * as appSettings from "application-settings";
+import { RouterExtensions } from "nativescript-angular/router";
+
 import {
   DrawerTransitionBase,
   SlideInOnTopTransition
 } from "nativescript-ui-sidedrawer";
 import { Frame } from "ui/frame";
 @Component({
-  selector: "Body",
+  selector: "Users",
   moduleId: module.id,
-  templateUrl: "./body.component.html",
-  styleUrls: ["./body.component.css"]
+  templateUrl: "./users.component.html",
+  styleUrls: ["./users.component.css"]
 })
-export class BodyComponent implements OnInit {
+export class UsersComponent implements OnInit {
   protected _sideDrawerTran: DrawerTransitionBase;
   protected selected: number;
   protected data = [];
   protected dialogOpen = false;
-  protected title: string = "";
-  protected description: string = "";
-  protected price: string = "";
-  protected sumPosts: number = 0;
+  protected username: string = "";
+  protected password: string = "";
+  protected secondpassword: string = "";
+  protected joinedAt: string = "";
+  protected sumUsers: number = 0;
   protected addLabelText: string = "";
   protected addButtonText: string = "";
   protected textError: string = "";
   protected textErrorValue: string = "";
   protected alpha: number = 0;
-  protected setSwipeAction: boolean = true;
-  protected setAddButtonVisibility: string = "visible";
+  protected k: number = 0;
+  protected ifCurrentUser = "";
 
-  hideSwipeAndAddButton(): void {
-    if (appSettings.hasKey("localUsername")) {
-      this.setSwipeAction = true;
-      this.setAddButtonVisibility = "visible";
-    } else {
-      this.setSwipeAction = false;
-      this.setAddButtonVisibility = "collapsed";
-    }
-  }
   showDialog(aux: number) {
     if (aux == 0) {
       this.alpha = 0;
       this.addButtonText = "Add";
-      this.addLabelText = "How can you make the post attractive ?";
+      this.addLabelText = "Add users individually !";
 
-      this.title = "";
-      this.description = "";
-      this.price = "";
+      this.username = "";
+      this.password = "";
+      this.secondpassword = "";
       this.textErrorValue = "";
       this.textError = "";
       this.dialogOpen = true;
     } else {
       this.alpha = 1;
       this.addButtonText = "Update";
-      this.addLabelText =
-        "How can you make the post more attractive after updates ?";
+      this.addLabelText = "Do you have some updates ?";
       let radListView = <RadListView>(
         FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
       );
-      this.title = radListView.items[this.selected].name;
-      this.description = radListView.items[this.selected].desc;
-      this.price = radListView.items[this.selected].price;
+      this.username = radListView.items[this.selected].username.toLowerCase();
+      this.password = "";
+      this.secondpassword = "";
+      this.textErrorValue = "";
+      this.textError = "";
       this.dialogOpen = true;
     }
   }
@@ -80,18 +75,31 @@ export class BodyComponent implements OnInit {
       args.ios.backgroundView.backgroundColor = newcolor.ios;
     }
   }
-  constructor() {}
+  constructor(private routerExtensions: RouterExtensions) {}
   ngOnInit(): void {
-    this.hideSwipeAndAddButton();
-    this.fetchPosts();
+    this.fetchUsers();
     this._sideDrawerTran = new SlideInOnTopTransition();
   }
   get sideDrawerTransition(): DrawerTransitionBase {
     return this._sideDrawerTran;
   }
   openDrawer(): void {
-    let X = <RadSideDrawer>Frame.topmost().getViewById("bottomDrawerId");
-    X.showDrawer();
+    let radListView = <RadListView>(
+      FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
+    );
+    if (
+      appSettings.getString("localUsername") ==
+      radListView.items[this.selected].username.toLowerCase()
+    ) {
+      this.ifCurrentUser =
+        "You're going to delete your current account ! after pressing delete your session will expire";
+      let X = <RadSideDrawer>Frame.topmost().getViewById("bottomDrawerId");
+      X.showDrawer();
+    } else {
+      this.ifCurrentUser = "Are you sure you want to delete this account ?";
+      let X = <RadSideDrawer>Frame.topmost().getViewById("bottomDrawerId");
+      X.showDrawer();
+    }
   }
 
   closeSideDrawer(): void {
@@ -102,10 +110,18 @@ export class BodyComponent implements OnInit {
     let radListView = <RadListView>(
       FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
     );
+
+    if (
+      appSettings.getString("localUsername") ==
+      radListView.items[this.selected].username.toLowerCase()
+    ) {
+      this.routerExtensions.navigate(["/home"], { clearHistory: true });
+      appSettings.clear();
+    }
     this.data.splice(this.selected, 1);
     radListView.notifySwipeToExecuteFinished();
     fetch(
-      "https://my-json-server.typicode.com/houssemfadhli/whateverapp/posts/" +
+      "https://my-json-server.typicode.com/houssemfadhli/whateverapp/users/" +
         this.selected +
         1,
       {
@@ -132,42 +148,62 @@ export class BodyComponent implements OnInit {
     const sideDrawer = <RadSideDrawer>app.getRootView();
     sideDrawer.showDrawer();
   }
-  fetchPosts(): void {
+  fetchUsers(): void {
     fetch(
-      "https://my-json-server.typicode.com/houssemfadhli/whateverapp/posts/"
+      "https://my-json-server.typicode.com/houssemfadhli/whateverapp/users/"
     )
       .then(response => response.json())
       .then(r => {
         for (let i = 0; i < r.length; i++) {
           this.data.push({
-            name: r[i].name,
-            postId: r[i].id,
-            desc: r[i].desc,
-            price: r[i].price + " DT",
-            imageSrc: r[i].imageSrc,
-            byUsername: ""
+            username: r[i].username.toUpperCase(),
+            password: r[i].password,
+            joinedAt: r[i].joinedAt
           });
         }
-        this.sumPosts = r.length;
+        this.sumUsers = r.length;
       })
       .catch(err => {
         console.log(err);
       });
   }
-  addOrUpdatePost(): void {
+  getAllhUsers(): number {
+    this.k=0;
+    for (let i = 0; i < this.data.length; i++) {
+      if (
+        this.username.trim().toLowerCase() == this.data[i].username.trim().toLowerCase()
+      ) {
+        this.k++;
+      }
+    }
+    return this.k;
+  }
+  getFullDate(): string {
+    let now = new Date();
+    return (
+      now.getHours() +
+      ":" +
+      now.getMinutes() +
+      " " +
+      now.getDay() +
+      "/" +
+      now.getMonth() +
+      "/" +
+      now.getFullYear()
+    ).toString();
+  }
+  addOrUpdateUser(): void {
     if (this.checkErrors()) {
       if (this.alpha == 0) {
         fetch(
-          "https://my-json-server.typicode.com/houssemfadhli/whateverapp/posts/",
+          "https://my-json-server.typicode.com/houssemfadhli/whateverapp/users/",
           {
             method: "POST",
             body: JSON.stringify({
-              name: this.title,
-              id: (this.sumPosts + 1).toString(),
-              desc: this.description,
-              price: this.price,
-              imageSrc: "https://image.flaticon.com/icons/svg/146/146817.svg",
-              byUsername: appSettings.getString("localUsername")
+              username: this.username.trim().toLowerCase(),
+              id: (this.sumUsers + 1).toString(),
+              password: this.password.trim().toLowerCase(),
+              joinedAt: this.getFullDate()
             }),
             headers: {
               "Content-type": "application/json; charset=UTF-8"
@@ -179,13 +215,13 @@ export class BodyComponent implements OnInit {
         this.closeDialog();
       } else {
         fetch(
-          "https://jsonplaceholder.typicode.com/posts/" + this.selected + 1,
+          "https://jsonplaceholder.typicode.com/users/" + this.selected + 1,
           {
             method: "PUT",
             body: JSON.stringify({
-              name: this.title,
-              price: this.price,
-              desc: this.description
+              username: this.username.trim().toLowerCase(),
+              password: this.password.trim().toLowerCase(),
+              joinedAt: this.getFullDate()
             }),
             headers: {
               "Content-type": "application/json; charset=UTF-8"
@@ -197,33 +233,52 @@ export class BodyComponent implements OnInit {
         let radListView = <RadListView>(
           FrameModule.Frame.topmost().currentPage.getViewById("radlistview")
         );
+        this.data[this.selected].username = this.username.trim().toUpperCase();
         this.closeDialog();
       }
     }
   }
   checkErrors(): boolean {
     if (
-      this.title.trim().length == 0 &&
-      this.description.trim().length == 0 &&
-      this.price.trim().length == 0
+      this.username.trim().length == 0 &&
+      this.password.trim().length == 0 &&
+      this.secondpassword.trim().length == 0
     ) {
       this.textErrorValue = "visible";
-      this.textError = "Title, description and price cannot be empty";
+      this.textError = "Username, password and second password cannot be empty";
       return false;
     }
-    if (this.title.trim().length == 0) {
+    if (this.username.trim().length == 0) {
       this.textErrorValue = "visible";
-      this.textError = "Title cannot be empty";
+      this.textError = "Username cannot be empty";
       return false;
     }
-    if (this.description.trim().length == 0) {
+    if (this.password.trim().length == 0) {
       this.textErrorValue = "visible";
-      this.textError = "Description cannot be empty";
+      this.textError = "Password cannot be empty";
       return false;
     }
-    if (this.price.trim().length == 0) {
+    if (this.secondpassword.trim().length == 0) {
       this.textErrorValue = "visible";
-      this.textError = "Price cannot be empty";
+      this.textError = "Second password cannot be empty";
+      return false;
+    }
+    if (this.password.trim() != this.secondpassword.trim()) {
+      this.textErrorValue = "visible";
+      this.textError = "Password does not match";
+      return false;
+    }
+    if (
+      this.password.trim().toLowerCase() ==
+      this.data[this.selected].password.trim().toLowerCase()
+    ) {
+      this.textErrorValue = "visible";
+      this.textError = "Try another new password";
+      return false;
+    }
+    if (this.getAllhUsers() > 0) {
+      this.textErrorValue = "visible";
+      this.textError = "Try another new username";
       return false;
     }
     this.textErrorValue = "";

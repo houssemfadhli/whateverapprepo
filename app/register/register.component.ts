@@ -17,8 +17,24 @@ export class RegisterComponent implements OnInit {
   protected secondpassword: string = "";
   protected textError: string = "";
   protected textErrorValue: string = "";
+  protected k : number = 0;
   onSignUp(): void {
+    this.k=0;
     this.fetchUsers();
+  }
+  getFullDate(): string {
+    let now = new Date();
+    return (
+      now.getHours() +
+      ":" +
+      now.getMinutes() +
+      " " +
+      now.getDay() +
+      "/" +
+      now.getMonth() +
+      "/" +
+      now.getFullYear()
+    ).toString();
   }
   checkErrors(aux: number): boolean {
     if (aux > 0) {
@@ -78,7 +94,8 @@ export class RegisterComponent implements OnInit {
         method: "POST",
         body: JSON.stringify({
           username: this.username.trim().toLowerCase(),
-          password: this.password.trim().toLowerCase()
+          password: this.password.trim().toLowerCase(),
+          joinedAt: this.getFullDate()
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -94,14 +111,12 @@ export class RegisterComponent implements OnInit {
     )
       .then(response => response.json())
       .then(r => {
-        var k: number = 0;
         for (let i = 0; i < r.length; i++) {
-          if (this.username.trim().toLowerCase() == r[i]) {
-            k++;
-            this.checkUsersDetails(k);
+          if (this.username.trim().toLowerCase() == r[i].username) {
+            this.k++;
           }
         }
-        this.checkUsersDetails(k);
+        this.checkUsersDetails(this.k);
       })
       .catch(err => {
         console.log(err);

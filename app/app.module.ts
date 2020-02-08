@@ -13,6 +13,7 @@ import { BodyComponent } from "./body/body.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
+import { UsersComponent } from "./users/users.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -27,7 +28,8 @@ import { NativeScriptFormsModule } from "nativescript-angular/forms";
     AppComponent,
     RegisterComponent,
     BodyComponent,
-    ProfileComponent
+    ProfileComponent,
+    UsersComponent
   ],
   schemas: [NO_ERRORS_SCHEMA]
 })

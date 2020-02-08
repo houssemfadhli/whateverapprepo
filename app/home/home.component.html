@@ -23,7 +23,10 @@
       text="{{ textError }}"
       class="text-error"
     ></label>
-    <Button class="sign-in-button" text="Sign in" (tap)="signIn()"> </Button>
+    <FlexboxLayout>
+      <Button class="sign-in-button" text="Sign in" (tap)="signIn()"> </Button>
+    <Button class="pass-anywy-button" text="Pass anyway" (tap)="passAnyway()" > </Button>
+    </FlexboxLayout>
     <label
       class="to-sign-up-screen"
       text="Not yet a member ? sign up."

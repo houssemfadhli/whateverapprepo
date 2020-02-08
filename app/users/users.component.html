@@ -16,7 +16,7 @@
       <RadListView
         [items]="data"
         id="radlistview"
-        swipeActions="{{setSwipeAction}}"
+        swipeActions="true"
         (pullToRefreshInitiated)="onPullToRefreshInitiated($event)"
         (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
         backgroundColor="#e6e6e6"
@@ -30,21 +30,27 @@
         </ListViewStaggeredLayout>
         <ng-template tkTemplate let-item="item">
           <DockLayout class="post-card-view">
-            <Image src="{{ item.imageSrc }}" class="item-image"></Image>
+            <Image
+              src="~/images/default-profile-pic.png"
+              class="item-image"
+            ></Image>
+
             <StackLayout backgroundColor="white">
               <Label
-                text="{{ item.name }}"
-                class="item-name"
+                text="{{ item.username }}"
+                class="item-username"
                 textWrap="true"
               ></Label>
               <Label
-                text="{{ item.desc }}"
-                class="item-desc"
+              visibility="collapsed"
+                text="{{ item.password }}"
+              ></Label>
+              <label text="Joined us ↓"></label>
+              <Label
+                text="{{ item.joinedAt }}"
+                class="item-joinedAt"
                 textWrap="true"
               ></Label>
-              <Label text="{{ item.price }}" class="item-price"> </Label>
-              <Label visibility="collapsed" text="{{ item.byUsername }}">
-              </Label>
             </StackLayout>
           </DockLayout>
         </ng-template>
@@ -77,25 +83,9 @@
           </StackLayout>
         </GridLayout>
       </RadListView>
-      <GridLayout columns="*" rows="auto,*,auto">
-        <GridLayout
-          columns="auto,*,auto"
-          rows="auto,auto"
-          col="0"
-          row="2"
-          padding="10"
-        >
-          <Button
-          visibility="{{setAddButtonVisibility}}"
-            class="add-button"
-            text="+"
-            (tap)="showDialog(0)"
-            col="2"
-            row="0"
-          >
-          </Button>
-        </GridLayout>
-      </GridLayout>
+      <StackLayout class="add-button-container">
+        <Button class="add-button" text="+" (tap)="showDialog(0)"> </Button>
+      </StackLayout>
     </GridLayout>
   </StackLayout>
 
@@ -108,20 +98,21 @@
         text="{{ addLabelText }}"
       ></label>
       <text-field
-        [(ngModel)]="title"
+        [(ngModel)]="username"
         class="text-field"
-        hint="Title"
+        hint="username"
       ></text-field>
       <text-field
-        [(ngModel)]="description"
+        [(ngModel)]="password"
         class="text-field"
-        hint="Description"
+        secure="true"
+        hint="Password"
       ></text-field>
       <text-field
         class="text-field"
-        hint="Price"
-        [(ngModel)]="price"
-        keyboardtype="number"
+        hint="Second password"
+        secure="true"
+        [(ngModel)]="secondpassword"
       ></text-field>
       <label
         visibility="{{ textErrorValue ? 'visible' : 'collapsed' }}"
@@ -132,7 +123,7 @@
         <Button
           class="dialog-add-button"
           text="{{ addButtonText }}"
-          (tap)="addOrUpdatePost()"
+          (tap)="addOrUpdateUser()"
         ></Button>
         <Button
           class="dialog-cancel-button"
@@ -157,7 +148,7 @@
       <label
         textWrap="true"
         class="drawer-label"
-        text="Are you sure you want to delete this post ?"
+        text="{{ifCurrentUser}}"
       >
       </label>
       <FlexboxLayout>

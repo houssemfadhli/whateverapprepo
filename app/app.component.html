@@ -28,11 +28,11 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
     <ScrollView row="1">
       <StackLayout class="sidedrawer-content">
         <GridLayout columns="auto, *" class="sidedrawer-list-item">
-          <Label col="0" text="&#xf015;" class="fa"></Label>
+          <Label col="0" text="&#xf038;" class="fa"></Label>
 
           <Label
             col="1"
-            text="Home"
+            text="Feed"
             (tap)="toHomeScreen()"
             class="p-r-10"
           ></Label>
@@ -44,6 +44,15 @@ http://docs.telerik.com/devtools/nativescript-ui/Controls/NativeScript/SideDrawe
             (tap)="toProfileScreen()"
             col="1"
             text="Profile"
+            class="p-r-10"
+          ></Label>
+        </GridLayout>
+        <GridLayout columns="auto, *" class="sidedrawer-list-item">
+          <Label col="0" text="&#xf0c0;" class="fa"></Label>
+          <Label
+          (tap)="toUsersScreen()"
+            col="1"
+            text="Users"
             class="p-r-10"
           ></Label>
         </GridLayout>

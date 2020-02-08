@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular/router";
 import * as appSettings from "application-settings";
-import { ActionBar } from "tns-core-modules/ui/action-bar/action-bar";
+
 @Component({
   selector: "Home",
   moduleId: module.id,
@@ -14,10 +14,16 @@ export class HomeComponent implements OnInit {
   protected username: string = "";
   protected textError: string = "";
   protected textErrorValue: string = "";
+  protected k: number = 0;
 
   constructor(private routerExtensions: RouterExtensions) {}
+
   signIn(): void {
     this.fetchUsers();
+  }
+
+  passAnyway(): void {
+    this.routerExtensions.navigate(["/body"], { clearHistory: true });
   }
   checkErrors(aux: number): boolean {
     if (this.password.trim().length == 0 && this.username.trim().length == 0) {
@@ -25,7 +31,6 @@ export class HomeComponent implements OnInit {
       this.textError = "Username and password cannot be empty";
       return false;
     }
-
     if (this.username.trim().length == 0) {
       this.textErrorValue = "visible";
       this.textError = "Username cannot be empty";
@@ -57,17 +62,15 @@ export class HomeComponent implements OnInit {
     )
       .then(response => response.json())
       .then(r => {
-        var k: number = 0;
         for (let i = 0; i < r.length; i++) {
           if (
             this.username.trim().toLowerCase() == r[i].username &&
             this.password.trim().toLowerCase() == r[i].password
           ) {
-            k++;
-            this.checkUsersDetails(k);
+            this.k++;
           }
         }
-        this.checkUsersDetails(k);
+        this.checkUsersDetails(this.k);
       })
       .catch(err => {
         console.log(err);
