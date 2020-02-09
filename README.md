@@ -6,7 +6,7 @@
 ![](app-screen.png)
 
 ## Short description  
-A test app that make it easy to find great deals on the things you want, just sell and make money.
+A test app that make it easy to find great deals on the things you want, just sell and make money.  
 Works with [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
 ## Features
