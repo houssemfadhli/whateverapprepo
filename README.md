@@ -6,7 +6,8 @@
 ![](app-screen.png)
 
 ## Short description  
-A test app that make it easy to find great deals on the things you want, just sell and make money.    
+A test app that make it easy to find great deals on the things you want, just sell and make money.
+Works with [JSONPlaceholder](https://jsonplaceholder.typicode.com/).
 
 ## Features
 
@@ -32,7 +33,7 @@ A test app that make it easy to find great deals on the things you want, just se
 github "houssemfadhli/whateverapprepo"
 ```
 #### Manually
-1. Download and drop ```whateverapprepo``` in any destination you want. 
+1. Download and drop ```whateverapprepo``` in any destination you want  
 2. Open the project with VScode
 2. Run it!  
 
